@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "word": "house",
+    "phonetic": "/haʊs/",
+    "type": "noun",
+    "meaning": "a building for people to live in",
+    "translation": "hus"
+  },
+  {
+    "id": 2,
+    "word": "car",
+    "phonetic": "/kɑːr/",
+    "type": "noun",
+    "meaning": "a road vehicle with an engine",
+    "translation": "bil"
+  },
+  {
+    "id": 3,
+    "word": "tree",
+    "phonetic": "/triː/",
+    "type": "noun",
+    "meaning": "a tall plant with leaves and branches",
+    "translation": "träd"
+  }
+]

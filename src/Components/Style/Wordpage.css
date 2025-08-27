@@ -1,0 +1,49 @@
+.container {
+    padding: 20px;
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 15px;
+}
+
+.card {
+    background: #f0fff0;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.word {
+    color: red;
+    margin: 0;
+}
+
+.type {
+    color: green;
+}
+
+.translation-card {
+    background: #f0fff0;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: #f9a825;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #f57f17;
+}
