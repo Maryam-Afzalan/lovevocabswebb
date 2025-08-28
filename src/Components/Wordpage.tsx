@@ -1,7 +1,8 @@
-import React from "react";
+import React, { use } from "react";
 import wordsData from "../Data/wordsData.json"
 import { useState } from "react";
 import "./Style/Wordpage.css";
+import { useNavigate } from "react-router-dom";
 
 interface Word {
     id: number;
@@ -29,12 +30,19 @@ const Wordpage: React.FC = () => {
     };
 
 
-
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate("/Mainpage");
+    }
 
     return (
         <div className="container">
-
-            <h3>The words you should learn today</h3>
+            <div className="header">
+                <div className="flag">flag</div>
+                <button onClick={handleClick}>
+                    Back</button>
+            </div>
+            <div> <h3>The words you should learn today</h3></div>
             <div className="card">
                 <h2 className="word">
                     {word.id}. {word.word}
