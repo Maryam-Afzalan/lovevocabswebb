@@ -3,6 +3,10 @@ import wordsData from "../Data/wordsData.json"
 import { useState } from "react";
 import "./Style/Wordpage.css";
 import { useNavigate } from "react-router-dom";
+import "flag-icons/css/flag-icons.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
+
 
 interface Word {
     id: number;
@@ -38,32 +42,38 @@ const Wordpage: React.FC = () => {
     return (
         <div className="container">
             <div className="header">
-                <div className="flag">flag</div>
-                <button onClick={handleClick}>
-                    Back</button>
-            </div>
-            <div> <h3>The words you should learn today</h3></div>
-            <div className="card">
-                <h2 className="word">
-                    {word.id}. {word.word}
-                </h2>
-                <p> <i>{word.phonetic}</i> | {word.type} </p>
-                <p>{word.meaning}</p>
-            </div>
-            <div className="translation-card">
-                <strong>{word.translation}</strong>
-            </div>
-            <div className="buttons">
-
-                {index < wordsData.length - 1 && (
-                    <button className="btn" onClick={nextWord}> Next word</button>
-                )}
-                {index > 0 && (
-                    <button className="btn" onClick={prevWord}> Previous word</button>
-                )}
+                <div className="englishflag"><span className="fi fi-gb" style={{ fontSize: "2em" }}></span>
+                </div>
+                <i onClick={handleClick} className="bi bi-x-lg"></i>
 
             </div>
+            <section>
+                <div> <h3>The words you should learn today.</h3></div>
 
+                <div className="card">
+                    <div className="card-word">
+                        <h2 >
+                            {word.id}. {word.word}
+                        </h2>
+                        <h3> <i>{word.phonetic}</i> | {word.type} </h3>
+                        <i className="bi bi-volume-up-fill"></i>
+                        <p>{word.meaning}</p>
+                        <i className="bi bi-trash3"></i>
+                    </div>
+
+                </div>
+                <div className="translation-card">
+                    <strong>{word.translation}</strong>
+                </div>
+                <div className="buttons">
+                    {index > 0 && (
+                        <button className="btn" onClick={prevWord}> Previous word</button>
+                    )}
+                    {index < wordsData.length - 1 && (
+                        <button className="btn" onClick={nextWord}> Next word</button>
+                    )}
+                </div>
+            </section>
         </div>
     );
 }
