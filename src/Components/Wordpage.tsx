@@ -5,6 +5,7 @@ import "./Style/Wordpage.css";
 import { useNavigate } from "react-router-dom";
 import "flag-icons/css/flag-icons.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import NewWordHeader from "./NewWordHeader";
 
 
 
@@ -35,18 +36,19 @@ const Wordpage: React.FC = () => {
 
 
     const navigate = useNavigate();
-    const handleClick = () => {
-        navigate("/Mainpage");
-    }
+    // const handleClick = () => {
+    //     navigate("/Mainpage");
+    // }
 
     return (
         <div className="container">
-            <div className="header">
+            {/* <div className="header">
                 <div className="englishflag"><span className="fi fi-gb" style={{ fontSize: "2em" }}></span>
                 </div>
                 <i onClick={handleClick} className="bi bi-x-lg"></i>
 
-            </div>
+            </div> */}
+            <NewWordHeader />
             <section>
                 <div> <h3>The words you should learn today.</h3></div>
 
@@ -69,9 +71,10 @@ const Wordpage: React.FC = () => {
                     {index > 0 && (
                         <button className="btn" onClick={prevWord}> Previous word</button>
                     )}
-                    {index < wordsData.length - 1 && (
+                    {index < wordsData.length - 1 ? (
                         <button className="btn" onClick={nextWord}> Next word</button>
-                    )}
+                    ) : (<button className="btn" onClick={() => navigate("/ready")}> Continue</button>)
+                    }
                 </div>
             </section>
         </div>

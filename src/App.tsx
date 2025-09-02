@@ -3,6 +3,7 @@ import './App.css';
 import Mainpage from './Components/Mainpage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Wordpage from './Components/Wordpage';
+import Readypage from './Components/Readypage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path='/' element={<Mainpage />} />
           <Route path="/Mainpage" element={<Mainpage />} />
           <Route path="/wordpage" element={<Wordpage />} />'
+          <Route path="/ready" element={<Readypage />} />
         </Routes>
       </BrowserRouter>
 
