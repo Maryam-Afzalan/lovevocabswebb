@@ -42,12 +42,7 @@ const Wordpage: React.FC = () => {
 
     return (
         <div className="container">
-            {/* <div className="header">
-                <div className="englishflag"><span className="fi fi-gb" style={{ fontSize: "2em" }}></span>
-                </div>
-                <i onClick={handleClick} className="bi bi-x-lg"></i>
 
-            </div> */}
             <NewWordHeader />
             <section>
                 <div> <h3>The words you should learn today.</h3></div>
