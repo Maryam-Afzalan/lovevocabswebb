@@ -24,6 +24,9 @@ function Mainpage() {
     const handleClick = () => {
         navigate("/Wordpage");
     }
+    const handleClickBox = () => {
+        navigate("/Testpage");
+    }
 
     return (
         <div className="mainpage">
@@ -37,6 +40,9 @@ function Mainpage() {
                         Today new words
 
                     </button>
+                </div>
+                <div >
+                    <button className="review-words" onClick={handleClickBox}>Reviw words</button>
                 </div>
             </div>
 
