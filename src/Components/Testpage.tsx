@@ -10,6 +10,8 @@ interface Word {
     translation: string;
     boxnumber: number;
     nextreview: string;
+    phonetic?: string;
+    example?: string;
 }
 let words: Word[] = [{
     id: 1,
@@ -18,7 +20,9 @@ let words: Word[] = [{
     type: "noun",
     translation: "hus",
     boxnumber: 1,
-    nextreview: "2023-10-01"
+    nextreview: "2023-10-01",
+    phonetic: "/haʊs/",
+    example: "This is my house."
 
 }, {
     id: 2,
@@ -27,9 +31,12 @@ let words: Word[] = [{
     meaning: "a road vehicle with an engine",
     translation: "bil",
     nextreview: "2023-10-01",
-    boxnumber: 1
+    boxnumber: 1,
+    phonetic: "/kɑr/",
+    example: "I drive a car to work."
 
 },
+
 {
     id: 3,
     word: "tree",
@@ -37,14 +44,27 @@ let words: Word[] = [{
     meaning: "a tall plant with leaves and branches",
     translation: "träd",
     nextreview: "2023-10-01",
-    boxnumber: 1
-
-}]
-
+    boxnumber: 1,
+    phonetic: "/triː/",
+    example: "The tree is very tall."
+},
+{
+    id: 4,
+    word: "make",
+    type: "verb",
+    meaning: "to create or form something",
+    translation: "göra",
+    nextreview: "2025-10-01",
+    boxnumber: 1,
+    phonetic: "/meɪk/",
+    example: "I will make a cake."
+}
+]
+// helper for date
 function addDays(date: Date, days: number): string {
     const result = new Date(date);
     result.setDate(result.getDate() + days);
-    return result.toISOString().split("T")[0]; // yyyy-mm-dd
+    return result.toISOString().split('T')[0]; // returnerar i formatet YYYY-MM-DD
 }
 
 function handleICan(wordId: number) {
@@ -61,29 +81,26 @@ function handleICan(wordId: number) {
 }
 
 function handleICannot(wordId: number) {
-    words = words.map(w => {
-        if (w.id === wordId) {
-            return {
-                ...w,
-                boxnumber: 1,                      // tillbaka till första boxen
-                nextreview: addDays(new Date(), 1) // imorgon
-            };
-        }
-        return w;
-    });
+    words = words.map(w => w.id === wordId
+        ? { ...w, boxnumber: 1, nextreview: addDays(new Date(), 1) }
+        : w
+    );
 }
-const PROGRESS_TIME = 10;
+const PROGRESS_TIME = 8;
 
 const Testpage: React.FC = () => {
     const [index, setIndex] = useState(0);
     const [progress, setProgress] = useState(0);
     const [flipped, setFlipped] = useState(false);
+    const [mode, setMode] = useState<"review" | "details">("review");
 
     const word = words[index];
 
     useEffect(() => {
+        if (mode !== "review") return;
         setProgress(0);
         setFlipped(false);
+
         const interval = setInterval(() => {
             setProgress((prev) => {
                 if (prev >= 100) {
@@ -96,17 +113,48 @@ const Testpage: React.FC = () => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [index]);
+    }, [index, mode]);
+
+    const goToNextWord = () => {
+        if (index < words.length - 1) {
+            setIndex(i => i + 1);
+            setMode("review");
+        } else {
+            alert("✅ Done! No more words.");
+        }
+    };
+
     const handleICanClick = () => {
         handleICan(word.id);
-        setIndex((i) => Math.min(i + 1, words.length - 1));
+        goToNextWord();
     };
 
     const handleICannotClick = () => {
         handleICannot(word.id);
-        setIndex((i) => Math.min(i + 1, words.length - 1));
+        setMode("details");
     };
 
+    if (mode === "details") {
+        return (
+            <div className="details-container">
+                <h3>The words you should learn</h3>
+                <div className="details-card">
+                    <h2>{word.word}</h2>
+                    <p><i>{word.phonetic}</i> | {word.type}</p>
+                    <p>{word.meaning}</p>
+                    <p><b>Example:</b> {word.example}</p>
+                </div>
+
+                <div className="translation-card">
+                    <h3>{word.translation}</h3>
+                </div>
+
+                <button className="btn back" onClick={goToNextWord}>
+                    Back
+                </button>
+            </div>
+        )
+    }
 
     return (
         <div className="testpage-container">
@@ -138,19 +186,20 @@ const Testpage: React.FC = () => {
                         </div>
                     </div>
                 </div>
-
-                <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: `${progress}%` }} />
-                </div>
-
-                <div className="answer-buttons">
-                    <button className="btn success" onClick={handleICanClick}>I can</button>
-                    <button className="btn danger" onClick={handleICannotClick}>I cannot</button>
-                </div>
             </div>
 
+            <div className="progress-bar">
+                <div className="progress-fill" style={{ width: `${progress}%` }} />
+            </div>
 
+            <div className="answer-buttons">
+                <button className="btn success" onClick={handleICanClick}>I can</button>
+                <button className="btn danger" onClick={handleICannotClick}>I cannot</button>
+            </div>
         </div>
+
+
+
     );
 }
 

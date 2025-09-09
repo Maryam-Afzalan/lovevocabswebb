@@ -42,7 +42,7 @@ function Mainpage() {
                     </button>
                 </div>
                 <div >
-                    <button className="review-words" onClick={handleClickBox}>Reviw words</button>
+                    <button className="review-words" onClick={handleClickBox}>Review words</button>
                 </div>
             </div>
 
